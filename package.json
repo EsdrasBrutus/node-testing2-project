@@ -2,8 +2,15 @@
   "name": "node-server-testing",
   "version": "1.0.0",
   "description": "Node Server Testing Challenge",
+  "main": "index.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "cross-env DB_ENV=testing jest --watchAll --verbose --runInBand",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
+    "resetdb": "knex migrate:rollback && knex migrate:latest && knex seed:run"
   },
   "jest": {
     "testEnvironment": "node"
@@ -14,11 +21,16 @@
   },
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.13.0",
+    "eslint": "^7.32.0",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.12",
     "supertest": "^6.0.1"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "knex": "^0.95.11",
+    "sqlite3": "^5.0.2"
   }
 }
